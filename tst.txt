@@ -1,10 +1,9 @@
 gfjd 
 uygf
 liu
-<<<<<<< HEAD
 kjgjm
 oiuyui
-=======
+
 
 hello Solia
->>>>>>> 6878ffe68559ef552f9b6384f7b01ea0d59ca60c
+
