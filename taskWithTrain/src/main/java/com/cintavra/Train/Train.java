@@ -3,62 +3,36 @@ package com.cintavra.Train;
 import java.util.ArrayList;
 
 public class Train {
-    final private static int COUNT_OF_COACHS = 3;
-    private int trainId;
-    private ArrayList<Station> stations;
-    private String beginStation;
-    private String endStation;
-    private Coach coaches[];
-
-/*    public Train(String beginStation, String endStation) {
-
-        this.beginStation = beginStation;
-        this.endStation = endStation;
-    }*/
-
-    public Train(int trainId) {
-
-        this.trainId = trainId;
-    }
-
-/*    public Station[] findBeginAndEndStations() {
-        Station wellStations[] ;
-
-        viewStation(wellStations);
-        return null nwellStations;
-    }*/
+    final private static int COUNT_OF_COACHS=3;
+    public int trainId;
+    ArrayList<Coach> coaches = new ArrayList<Coach>();
+    ArrayList<String> trainStations = new ArrayList<String>();
 
     public void setTrainId(int trainId) {
-
         this.trainId = trainId;
     }
 
-    public void createStations() {
-
-        ArrayList<Station> stations = new ArrayList<Station>();
-        /*
-        * цикл по кількості станцій
-        * ініціалізація станції
-        * запис станції в колекцію*/
-        Station station = new Station();
-
-
-        this.stations = stations;
+    public void setTrainStations(String ...a){
+        for(String str : a)
+            trainStations.add(str);
     }
 
-    public void setCoachs() {
-        Coach coaches[] = new Coach[COUNT_OF_COACHS];
-
-        for(int i = 0; i < COUNT_OF_COACHS; i++){
+    Train(){
+        for(int i = 0; i < COUNT_OF_COACHS; i++) {
             Coach coach = new Coach();  //ініціалізація даних про вагон
-            //додаємо в масив вагонів
+            coaches.add(coach);
         }
-
-        this.coaches = coaches;
     }
 
-    /*public Station viewStation(Station wellStations[]){
+    public void allPlaceInTrain(){
+        for(Coach value : coaches){
+            value.showFreePlace();
+            System.out.println();
+        }
+    }
 
-
-    }*/
+    public void choosePlaceInTrain(int numberCoach, int numberPlace){
+        Coach foundCoach = coaches.get(numberCoach);
+        foundCoach.buyPlace(numberPlace);
+    }
 }

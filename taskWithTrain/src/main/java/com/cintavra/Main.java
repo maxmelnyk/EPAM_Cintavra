@@ -1,34 +1,46 @@
 package com.cintavra;
 
-import com.cintavra.Train.Train;
-
-import java.util.ArrayList;
 import java.util.Scanner;
+
+import com.cintavra.Train.*;
 
 public class Main {
 
     public static void main(String[] args) {
+	// write your code here
+        final int CHOICEMARK = 1;
+        int choice;
 
-        //ініціалізація поїздів
-        ArrayList<Train> trains = new ArrayList<Train>();
+        Railway r = new Railway();
 
+        do{
+            System.out.println("Enter start station:");
+            Scanner scan = new Scanner(System.in);
+            String startStation = scan.nextLine();
 
-        //створення клієнтів
+            System.out.println("Enter final station:");
+            String finalStation = scan.nextLine();
 
+            for (Train i : r.searchTrains(startStation, finalStation)) {
+                System.out.println(i.trainId);
+                i.allPlaceInTrain();
+            }
 
-        //користувач задає пункт А і В
-        //задає час
-        //йому відображається список поїздів і часи їх відправлення
-        //після вибору поїзда іде відображення списку вагонів із місцями
-        //тоді користувач вибирає вагон і йому відображаються вількі квитки з id(місце в вагоні)
-        //користувач заповнює інформацію про квиток
-        //квиток виводиться користувачеві і записується в масив квитків
+            System.out.println("Enter number of train:");
+            int trainNumber = (scan.nextInt()) - 1;
 
-        Scanner scanner = new Scanner(System.in);
-        String beginWay = scanner.nextLine();
-        String endWay = scanner.nextLine();
+            System.out.println("Enter number of coach:");
+            int coachNumber = scan.nextInt() - 1;
 
+            System.out.println("Enter number of place:");
+            int placeNumber = scan.nextInt() - 1;
 
-//        stations = train.findBeginAndEndStations();
-    }
+            r.trainSeacher.get(trainNumber).choosePlaceInTrain(coachNumber, placeNumber);
+
+            System.out.println("For finish buying enter 1");
+            choice = scan.nextInt();
+
+            r.removeTrainSeacher();
+        }while(choice == CHOICEMARK);
+     }
 }
