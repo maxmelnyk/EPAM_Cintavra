@@ -1,6 +1,6 @@
 package com.cintavra.Train;
 
-import java.util.ArrayList;
+        import java.util.ArrayList;
 
 public class Coach {
     private static final int AMOUNT_OF_PLACES = 4;

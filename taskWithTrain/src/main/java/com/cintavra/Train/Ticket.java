@@ -25,10 +25,4 @@ public class Ticket {
     public Client getOwner() {
         return owner;
     }
-
-    public void setOwner(Client owner) {
-        this.owner = owner;
-    }
-
-
 }

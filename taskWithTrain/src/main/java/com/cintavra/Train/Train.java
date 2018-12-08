@@ -10,10 +10,26 @@ public class Train {
     private Coach coaches[];
     private ArrayList<String> ourRout;
 
+    //отримуємо поїзд з номером, його маршрутом, часом коли він їде і кількістю вагонів
+    public Train() {
+        this.trainId = getTrainId();
+        route.getStationNames();
+        checkTime();
+        this.coaches = getCoaches();
+    }
+
+    public int getTrainId() {
+        return trainId;
+    }
+
+    public void setTrainId(int trainId) {
+        this.trainId = trainId;
+    }
+
     //перевіряємо чи поїзд їде по потрібних нам станціях
     private boolean checkStation() {
         boolean result = false;
-        for (String stationName : route.getListOfStation()) {
+        for (String stationName : route.getStationNames()) {
             if (stationName.contains(station.getBeginStation())) {
                 if (stationName.contains(station.getEndStation())) {
                     result = true;
@@ -25,16 +41,16 @@ public class Train {
 
     //перевіряємо час
     public String[] checkTime() {
-        return route.getTime();
+        return route.getLeaveTime();
     }
 
 
-    //показуємо наш маршрут
+    //показуємо наш маршрут, але навіщо воно нам?
     public void createOurRoute() {
         if (checkStation()) {
-            for (String stationName : route.getListOfStation()) {
+            for (String stationName : route.getStationNames()) {
                 if (stationName.indexOf(0) <= stationName.indexOf(station.getBeginStation())
-                        && stationName.indexOf(route.getListOfStation().length - 1) >= stationName.indexOf(station.getEndStation())) {
+                        && stationName.indexOf(route.getStationNames().length - 1) >= stationName.indexOf(station.getEndStation())) {
                     ourRout.add(stationName);
                 }
             }

@@ -1,7 +1,7 @@
 package com.cintavra.Train;
 
 public class Station {
-  private String name;
+    private String name;
     private String beginStation;
     private String endStation;
 

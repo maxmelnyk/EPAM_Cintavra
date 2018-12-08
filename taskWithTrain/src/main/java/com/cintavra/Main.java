@@ -11,12 +11,9 @@ public class Main {
         Train train = new Train();
         //ініціалізація поїздів
         ArrayList<Train> trains = new ArrayList<Train>();
-//        for (:trains) {
-            trains.add(new Train());
-//        }
+        trains.add(new Train());
 
         //створення клієнтів
-
 
         //користувач задає пункт А і В
         //задає час
