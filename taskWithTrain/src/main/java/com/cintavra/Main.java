@@ -8,10 +8,12 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-
+        Train train = new Train();
         //ініціалізація поїздів
         ArrayList<Train> trains = new ArrayList<Train>();
-
+//        for (:trains) {
+            trains.add(new Train());
+//        }
 
         //створення клієнтів
 

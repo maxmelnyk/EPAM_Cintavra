@@ -1,17 +1,19 @@
 package com.cintavra.Train;
 
+import java.util.ArrayList;
+
 public class Coach {
-    final private static int AMOUNT_OF_PLACES = 4;
-    private Ticket tickets[];
+    private static final int AMOUNT_OF_PLACES = 4;
+    private Ticket ticket;
+    private ArrayList<Ticket> tickets = new ArrayList<>();
 
-    public void createFreeTickets() {
-        Ticket tickets[] = new Ticket[AMOUNT_OF_PLACES];
-
-        for(int i = 0; i < AMOUNT_OF_PLACES; i++){
-            Ticket ticket = new Ticket(true);  //ініціалізація даних про квиток
-            //додаємо в масив квитків
+    //перевіряємо чи квитки не заброньовані, якщо вільні, то додаємо до списку вільних
+    public ArrayList<Ticket> getFreeTicketsList() {
+        for (int i = 0; i < AMOUNT_OF_PLACES; i++) {
+            if (ticket.isEmptySeat()) {
+                tickets.add(ticket);
+            }
         }
-
-        this.tickets = tickets;
+        return tickets;
     }
 }

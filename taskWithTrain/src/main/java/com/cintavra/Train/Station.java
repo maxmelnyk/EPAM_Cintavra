@@ -1,15 +1,27 @@
 package com.cintavra.Train;
 
-//переробити на enum
 public class Station {
-    private String name;
-    private String leaveTimes[];
+  private String name;
+    private String beginStation;
+    private String endStation;
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setLeaveTimes(String[] leaveTimes) {
-        this.leaveTimes = leaveTimes;
+    public String getBeginStation() {
+        return beginStation;
+    }
+
+    public void setBeginStation(String beginStation) {
+        this.beginStation = beginStation;
+    }
+
+    public String getEndStation() {
+        return endStation;
+    }
+
+    public void setEndStation(String endStation) {
+        this.endStation = endStation;
     }
 }

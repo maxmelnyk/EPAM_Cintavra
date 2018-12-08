@@ -3,62 +3,55 @@ package com.cintavra.Train;
 import java.util.ArrayList;
 
 public class Train {
-    final private static int COUNT_OF_COACHS = 3;
+    private static final int COUNT_OF_COACHES = 3;
     private int trainId;
-    private ArrayList<Station> stations;
-    private String beginStation;
-    private String endStation;
+    private Station station;
+    private Route route;
     private Coach coaches[];
+    private ArrayList<String> ourRout;
 
-/*    public Train(String beginStation, String endStation) {
-
-        this.beginStation = beginStation;
-        this.endStation = endStation;
-    }*/
-
-    public Train(int trainId) {
-
-        this.trainId = trainId;
-    }
-
-/*    public Station[] findBeginAndEndStations() {
-        Station wellStations[] ;
-
-        viewStation(wellStations);
-        return null nwellStations;
-    }*/
-
-    public void setTrainId(int trainId) {
-
-        this.trainId = trainId;
-    }
-
-    public void createStations() {
-
-        ArrayList<Station> stations = new ArrayList<Station>();
-        /*
-        * цикл по кількості станцій
-        * ініціалізація станції
-        * запис станції в колекцію*/
-        Station station = new Station();
-
-
-        this.stations = stations;
-    }
-
-    public void setCoachs() {
-        Coach coaches[] = new Coach[COUNT_OF_COACHS];
-
-        for(int i = 0; i < COUNT_OF_COACHS; i++){
-            Coach coach = new Coach();  //ініціалізація даних про вагон
-            //додаємо в масив вагонів
+    //перевіряємо чи поїзд їде по потрібних нам станціях
+    private boolean checkStation() {
+        boolean result = false;
+        for (String stationName : route.getListOfStation()) {
+            if (stationName.contains(station.getBeginStation())) {
+                if (stationName.contains(station.getEndStation())) {
+                    result = true;
+                }
+            }
         }
-
-        this.coaches = coaches;
+        return result;
     }
 
+    //перевіряємо час
+    public String[] checkTime() {
+        return route.getTime();
+    }
+
+
+    //показуємо наш маршрут
+    public void createOurRoute() {
+        if (checkStation()) {
+            for (String stationName : route.getListOfStation()) {
+                if (stationName.indexOf(0) <= stationName.indexOf(station.getBeginStation())
+                        && stationName.indexOf(route.getListOfStation().length - 1) >= stationName.indexOf(station.getEndStation())) {
+                    ourRout.add(stationName);
+                }
+            }
+        }
+        System.out.println(ourRout);
+    }
+//TODO не знаю, що тут потрібно було писати
     /*public Station viewStation(Station wellStations[]){
 
-
     }*/
+
+    public Coach[] getCoaches() {
+        coaches = new Coach[COUNT_OF_COACHES];
+        for (int i = 0; i < COUNT_OF_COACHES; i++) {
+            coaches[i] = new Coach();
+        }
+
+        return coaches;
+    }
 }
