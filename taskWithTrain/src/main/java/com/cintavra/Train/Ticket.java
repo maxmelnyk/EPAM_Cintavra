@@ -28,7 +28,7 @@ public class Ticket {
         }
     }
 
-    public void posibleToBeFree(String startStation, String endStation, String[] stations, int index) {
+    public void isFree(String startStation, String endStation, String[] stations, int index) {
         int begin = Arrays.asList(stations).indexOf(startStation);
         int end = Arrays.asList(stations).indexOf(endStation);
         int impossible = 0;

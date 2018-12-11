@@ -1,45 +1,43 @@
 package com.cintavra.Train;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
-import java.util.Scanner;
 
 public class Service {
-    public static ArrayList<Train> trains = new ArrayList<Train>();
-    public static ArrayList<Train> trainSearcher = new ArrayList<Train>();
+    public static ArrayList<Train> trainSearcher = new ArrayList<>();
 
-    public static String[][] createRoutes(){
+    private static String[][] createRoutes() {
+
         return new String[][]{
                 {"lviv", "ternopil", "kyiv"},
                 {"uzhgorod", "lviv", "kyiv"},
                 {"uzhgorod", "ternopil", "kyiv"}
         };
     }
-    public static ArrayList<Train> createTrains(){
-        String[] timeArray = {"2018-04-01T03:30", "2018-04-01T03:30", "2018-04-01T03:30"};
+
+    private static ArrayList<Train> createTrains() {
+
         String[][] routeArray = createRoutes();
-        ArrayList<Train> trains = new ArrayList<Train>();
+        String[] timeArray = {"2018-04-01T03:30", "2018-04-01T03:30", "2018-04-01T03:30"};
+        ArrayList<Train> trains = new ArrayList<>();
 
-        for(int i = 0; i < routeArray.length; i++) {
+        for (int i = 0; i < routeArray.length; i++) {
 
-            trains.add(new Train(i+1, LocalDateTime.parse(timeArray[i]), routeArray[i]));
+            trains.add(new Train(i + 1, LocalDateTime.parse(timeArray[i]), routeArray[i]));
         }
 
         return trains;
     }
 
     public static ArrayList<Train> searchTrains(String station1, String station2) {
-        for (Train lookThroughTrains : trains) {
-            ArrayList<String> tmp = new ArrayList<String>(Arrays.asList(lookThroughTrains.trainStations));
+        for (Train lookThroughTrains : createTrains()) {
+            ArrayList<String> tmp = new ArrayList<>(Arrays.asList(lookThroughTrains.trainStations));
             if (tmp.contains(station1.toLowerCase()) && tmp.contains(station2.toLowerCase()) &&
                     tmp.indexOf(station1.toLowerCase()) < tmp.indexOf(station2.toLowerCase()))
                 trainSearcher.add(lookThroughTrains);
         }
+
         return trainSearcher;
     }
 
