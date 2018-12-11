@@ -1,6 +1,5 @@
 package com.cintavra;
 
-import java.text.ParseException;
 import java.util.Scanner;
 
 import com.cintavra.Train.*;
@@ -10,7 +9,6 @@ public class Main {
     public static void main(String[] args) {
         // write your code here
         int choice = 0;
-            Railway railway = new Railway();
         do {
             System.out.println("Enter start station:");
             Scanner scan = new Scanner(System.in);
@@ -21,12 +19,12 @@ public class Main {
 
 
 
-            if (railway.searchTrains(startStation, finalStation).isEmpty()) {
+            if (Service.searchTrains(startStation, finalStation).isEmpty()) {
 
                 System.out.println("There is no train with such route.");
             } else {
 
-                for (Train i : railway.trainSearcher) {
+                for (Train i : Service.trainSearcher) {
 
                     i.allPlaceInTrain(startStation, finalStation);
                 }
@@ -41,7 +39,7 @@ public class Main {
                 int placeNumber = scan.nextInt() - 1;
 
                 //перевірка на існування даних за значеннями введених користувачем
-                if(railway.dataChecking(trainNumber, coachNumber, placeNumber)){
+                if(Service.dataChecking(trainNumber, coachNumber, placeNumber)){
 
                     System.out.println("Ticket info:");
                     System.out.println(" Train number: " + (trainNumber + 1) + "\n Number of coach: " + (coachNumber + 1) +
@@ -52,8 +50,8 @@ public class Main {
 
                     if (choice == 1) {
                         //buying ticket
-                        railway.trainSearcher.get(trainNumber).choosePlaceInTrain(coachNumber, placeNumber, startStation, finalStation);
-                        railway.removetrainSearcher();
+                        Service.trainSearcher.get(trainNumber).choosePlaceInTrain(coachNumber, placeNumber, startStation, finalStation);
+                        Service.removetrainSearcher();
                         System.out.println("Purchase successful!");
                     }
                 }else{
