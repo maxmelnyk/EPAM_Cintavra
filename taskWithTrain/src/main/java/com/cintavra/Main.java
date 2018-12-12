@@ -9,6 +9,8 @@ public class Main {
     public static void main(String[] args) {
         // write your code here
         int choice = 0;
+        Service service = new Service();
+
         do {
             System.out.println("Enter start station:");
             Scanner scan = new Scanner(System.in);
@@ -18,15 +20,14 @@ public class Main {
             String finalStation = scan.nextLine();
 
 
-
-            if (Service.searchTrains(startStation, finalStation).isEmpty()) {
+            if (service.searchTrains(startStation, finalStation).isEmpty()) {
 
                 System.out.println("There is no train with such route.");
             } else {
 
-                for (Train i : Service.trainSearcher) {
+                for (Train train : service.trainSearcher) {
 
-                    i.allPlaceInTrain(startStation, finalStation);
+                    service.showAllPlaceInTrain(startStation, finalStation, train);
                 }
 
                 System.out.println("Enter number of train:");
@@ -39,22 +40,30 @@ public class Main {
                 int placeNumber = scan.nextInt() - 1;
 
                 //перевірка на існування даних за значеннями введених користувачем
-                if(Service.dataChecking(trainNumber, coachNumber, placeNumber)){
+                if (service.dataChecking(trainNumber, coachNumber, placeNumber)) {
+
+                    System.out.println();
+                    System.out.println("Print your name:");
+                    scan.nextLine();
+                    String userName = scan.nextLine();
+                    System.out.println();
 
                     System.out.println("Ticket info:");
                     System.out.println(" Train number: " + (trainNumber + 1) + "\n Number of coach: " + (coachNumber + 1) +
-                            "\n Place number: " + (placeNumber + 1));
+                            "\n Place number: " + (placeNumber + 1) + "\n Customer: " + userName);
                     System.out.println("\nTo proceed enter 1");
 
                     choice = scan.nextInt();
 
                     if (choice == 1) {
+
                         //buying ticket
-                        Service.trainSearcher.get(trainNumber).choosePlaceInTrain(coachNumber, placeNumber, startStation, finalStation);
-                        Service.removetrainSearcher();
+                        service.choosePlaceInTrain(trainNumber, coachNumber, placeNumber, startStation, finalStation, userName);
+                        service.removeTrainSearcher();
                         System.out.println("Purchase successful!");
                     }
-                }else{
+
+                } else {
                     System.out.println("Incorrect data!\nTry again.");
                     continue;
                 }

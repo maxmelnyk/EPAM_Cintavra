@@ -1,11 +1,10 @@
 package com.cintavra.Train;
 
-import java.util.Arrays;
+
 
 public class Ticket {
     public boolean free;
-    private String clientName;
-    public boolean[] stations;
+    public String clientName;
     public String startStation;
     public String endStation;
 
@@ -13,38 +12,11 @@ public class Ticket {
         this.free = true;
     }
 
-    public void buyTicket(String[] stations, String startStation, String endStation) {
-        free = false;
+    public void buyTicket(String startStation, String endStation, String userName) {
+
         this.startStation = startStation;
         this.endStation = endStation;
-
-        int begin = Arrays.asList(stations).indexOf(startStation);
-        int end = Arrays.asList(stations).indexOf(endStation);
-
-        this.stations = new boolean[stations.length];
-
-        for (int j = begin; j <= end; j++) {
-            this.stations[j] = false;
-        }
+        clientName = userName;
+        free = false;
     }
-
-    public void isFree(String startStation, String endStation, String[] stations, int index) {
-        int begin = Arrays.asList(stations).indexOf(startStation);
-        int end = Arrays.asList(stations).indexOf(endStation);
-        int impossible = 0;
-
-        for (int i = begin + 1; i < end; i++) {
-            if (this.stations[i] == false) {
-                impossible = 1;
-                break;
-            }
-        }
-
-        if (impossible == 0) {
-            System.out.print((index + 1) + " ");
-            this.free = true;
-        }
-    }
-
-
 }
