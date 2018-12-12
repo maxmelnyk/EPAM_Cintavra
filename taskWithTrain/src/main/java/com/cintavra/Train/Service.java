@@ -1,8 +1,6 @@
 package com.cintavra.Train;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Service {
     private ArrayList<Train> trains = new ArrayList<>();
@@ -51,7 +49,7 @@ public class Service {
                 if (trainSearcher.get(trainNumber).coaches.get(coachNumber).tickets.length > placeNumber)
 
                     //якщо квиток вільний і існує впринципі, то повертає true
-                    return true;        /*trainSearcher.get(trainNumber).coaches.get(coachNumber).tickets[placeNumber].free*/
+                    return trainSearcher.get(trainNumber).coaches.get(coachNumber).tickets[placeNumber].free; /*true*/ //Якщо поставити true, то враховуватиме можливість замовлення зайнятого квитка, але завжди виводитиме усі квитки.
 
         return false;
     }
@@ -108,7 +106,7 @@ public class Service {
 
         System.out.print("\nPlace num: ");
 
-        for (int i = 0; i < coach.getCountFreePlace(); i++) {
+        for (int i = 0; i < coach.getAmountOfPlaces(); i++) {
             if (coach.tickets[i].free) {
 
                 System.out.print((i + 1) + " ");

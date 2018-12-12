@@ -19,7 +19,7 @@ public class Coach {
         return countFreePlace;
     }
 
-    public static int getAmountOfPlaces() {
+    public int getAmountOfPlaces() {
         return AMOUNT_OF_PLACES;
     }
 
