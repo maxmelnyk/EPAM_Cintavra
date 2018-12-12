@@ -1,33 +1,84 @@
 package com.cintavra;
 
-import com.cintavra.Train.Train;
-
-import java.util.ArrayList;
 import java.util.Scanner;
+
+import com.cintavra.Train.*;
 
 public class Main {
 
     public static void main(String[] args) {
-        Train train = new Train();
-        //ініціалізація поїздів
-        ArrayList<Train> trains = new ArrayList<Train>();
-        trains.add(new Train());
 
-        //створення клієнтів
+        Scanner scan = new Scanner(System.in);
+        int choice = 0;
+        Service service = new Service();
 
-        //користувач задає пункт А і В
-        //задає час
-        //йому відображається список поїздів і часи їх відправлення
-        //після вибору поїзда іде відображення списку вагонів із місцями
-        //тоді користувач вибирає вагон і йому відображаються вількі квитки з id(місце в вагоні)
-        //користувач заповнює інформацію про квиток
-        //квиток виводиться користувачеві і записується в масив квитків
+        do {
+            ticketOrder(service);
 
-        Scanner scanner = new Scanner(System.in);
-        String beginWay = scanner.nextLine();
-        String endWay = scanner.nextLine();
+            System.out.println("\nTo buy another ticket enter 1");
+            choice = scan.nextInt();
+
+        } while (choice == 1);
+    }
+
+    private static void ticketOrder(Service service) {
+
+        int choice = 0;
+
+        System.out.println("Enter start station:");
+        Scanner scan = new Scanner(System.in);
+        String startStation = scan.nextLine();
+
+        System.out.println("Enter final station:");
+        String finalStation = scan.nextLine();
 
 
-//        stations = train.findBeginAndEndStations();
+        if (service.searchTrains(startStation, finalStation).isEmpty()) {
+
+            System.out.println("There is no train with such route.");
+        } else {
+
+            for (Train train : service.trainSearcher) {
+
+                service.showAllPlaceInTrain(startStation, finalStation, train);
+            }
+
+            System.out.println("Enter number of train:");
+            int trainNumber = (scan.nextInt()) - 1;
+
+            System.out.println("Enter number of coach:");
+            int coachNumber = scan.nextInt() - 1;
+
+            System.out.println("Enter number of place:");
+            int placeNumber = scan.nextInt() - 1;
+
+            //перевірка на існування даних за значеннями введених користувачем
+            if (service.dataChecking(trainNumber, coachNumber, placeNumber)) {
+
+                System.out.println();
+                System.out.println("Print your name:");
+                scan.nextLine();
+                String userName = scan.nextLine();
+                System.out.println();
+
+                System.out.println("Ticket info:");
+                System.out.println(" Train number: " + (trainNumber + 1) + "\n Number of coach: " + (coachNumber + 1) +
+                        "\n Place number: " + (placeNumber + 1) + "\n Customer: " + userName);
+                System.out.println("\nTo proceed enter 1");
+
+                choice = scan.nextInt();
+
+                if (choice == 1) {
+
+                    //buying ticket
+                    service.choosePlaceInTrain(trainNumber, coachNumber, placeNumber, startStation, finalStation, userName);
+                    service.removeTrainSearcher();
+                    System.out.println("Purchase successful!");
+                }
+
+            } else {
+                System.out.println("Incorrect data!\nTry again.");
+            }
+        }
     }
 }

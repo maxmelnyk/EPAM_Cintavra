@@ -1,28 +1,19 @@
 package com.cintavra.Train;
 
-//TODO тут явно ще щось потрібно дописати
 public class Ticket {
-    private String id;
-    private boolean emptySeat;
-    private Client owner;
+    public boolean free;
+    public String clientName;
+    public String startStation;
+    public String endStation;
 
-    public String getId() {
-        return id;
+    public Ticket() {
+        this.free = true;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public boolean isEmptySeat() {
-        return emptySeat;
-    }
-
-    public void setEmptySeat(boolean emptySeat) {
-        this.emptySeat = emptySeat;
-    }
-
-    public Client getOwner() {
-        return owner;
+    public void buyTicket(String startStation, String endStation, String userName) {
+        this.startStation = startStation;
+        this.endStation = endStation;
+        clientName = userName;
+        free = false;
     }
 }
