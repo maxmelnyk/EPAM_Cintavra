@@ -3,10 +3,10 @@ package com.cintavra.Train;
 
 
 public class Ticket {
-    public boolean free;
-    public String clientName;
-    public String startStation;
-    public String endStation;
+    protected boolean free;
+    protected String clientName;
+    protected String startStation;
+    protected String endStation;
 
     public Ticket() {
         this.free = true;

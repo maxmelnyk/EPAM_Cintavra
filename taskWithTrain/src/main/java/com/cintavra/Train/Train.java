@@ -10,15 +10,15 @@ public class Train {
     private int countOfCoaches;
     private int trainId;
 //    public LocalDateTime date;
-    public ArrayList<Coach> coaches = new ArrayList<>();
-    public ArrayList<String> trainStations = new ArrayList<>();
+    protected ArrayList<Coach> coaches = new ArrayList<>();
+    protected ArrayList<String> trainListtations = new ArrayList<>();
 
     Train(int trainId, /*LocalDateTime date,*/ String[] route) {
         this.countOfCoaches = 3;
         this.trainId = trainId;
         setCoaches();
 //        this.date = date;
-        this.trainStations.addAll(Arrays.asList(route));
+        this.trainListtations.addAll(Arrays.asList(route));
 
     }
 
@@ -30,11 +30,7 @@ public class Train {
         }
     }
 
-    public int getTrainId() {
+    protected int getTrainId() {
         return trainId;
-    }
-
-    public void setTrainId(int trainId) {
-        this.trainId = trainId;
     }
 }
