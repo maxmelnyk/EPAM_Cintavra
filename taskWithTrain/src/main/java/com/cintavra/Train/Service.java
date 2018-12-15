@@ -59,7 +59,7 @@ public class Service {
                 if (trainsForClient.get(trainNumber).coaches.get(coachNumber).tickets.length > placeNumber)
 
                     //якщо квиток вільний і існує впринципі, то повертає true
-                    return trainsForClient.get(trainNumber).coaches.get(coachNumber).tickets[placeNumber].free; /*true*/ //Якщо поставити true, то враховуватиме можливість замовлення зайнятого квитка, але завжди виводитиме усі квитки.
+                    return trainsForClient.get(trainNumber).coaches.get(coachNumber).tickets[placeNumber].free;
 
         return false;
     }
@@ -198,8 +198,7 @@ public class Service {
 
                     if (choice == 1) {
 
-                        //buying ticket
-                        choosePlaceInTrain();
+                        choosePlaceInTrain(); //buying ticket
                         removetrainsForClient();
                         System.out.println("Purchase successful!");
                     } else {
