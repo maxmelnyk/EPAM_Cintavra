@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Coach {
-    final private static int AMOUNT_OF_PLACES = 4;
+    private int AMOUNT_OF_PLACES = 4;
     public int countFreePlace = AMOUNT_OF_PLACES;
     public Ticket[] tickets = new Ticket[AMOUNT_OF_PLACES];
 
