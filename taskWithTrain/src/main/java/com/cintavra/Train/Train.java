@@ -11,14 +11,14 @@ public class Train {
     private int trainId;
 //    public LocalDateTime date;
     protected ArrayList<Coach> coaches = new ArrayList<>();
-    protected ArrayList<String> trainListtations = new ArrayList<>();
+    protected ArrayList<String> trainListStations = new ArrayList<>();
 
     Train(int trainId, /*LocalDateTime date,*/ String[] route) {
         this.countOfCoaches = 3;
         this.trainId = trainId;
         setCoaches();
 //        this.date = date;
-        this.trainListtations.addAll(Arrays.asList(route));
+        this.trainListStations.addAll(Arrays.asList(route));
 
     }
 
