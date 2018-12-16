@@ -24,9 +24,4 @@ public class Coach {
     public int getAmountOfPlaces() {
         return amountOfPlaces;
     }
-
-    @Override
-    public String toString() {
-        return "Coach amountOfPlaces=" + amountOfPlaces + ", countFreePlace=" + countFreePlace + ", tickets=" + Arrays.toString(tickets);
-    }
 }

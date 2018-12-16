@@ -26,8 +26,4 @@ public class Train {
         return trainId;
     }
 
-    @Override
-    public String toString() {
-        return "Train has " + COUNT_OF_COACHES + ", trainId=" + trainId + ", trainListStations=" + trainListStations;
-    }
-}
+   }
