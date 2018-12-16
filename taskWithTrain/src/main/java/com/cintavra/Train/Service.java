@@ -1,128 +1,184 @@
 package com.cintavra.Train;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Service {
+    private int trainNumber;
+    private int coachNumber;
+    private int placeNumber;
+    private String startStation;
+    private String endStation;
+    private String userName;
     private ArrayList<Train> trainList = new ArrayList<>();
-    public ArrayList<Train> trainSearcher = new ArrayList<>();
+    private ArrayList<Train> trainsForClient = new ArrayList<>();
 
     public Service() {
-        setTrains();
+        setTrainList();
     }
 
-    private static String[][] createRoutes() {
-        return new String[][]{
-                {"lviv", "ternopil", "kyiv"},
-                {"uzhgorod", "lviv", "kyiv"},
-                {"uzhgorod", "ternopil", "kyiv"}
-        };
-    }
-
-    private void setTrains() {
+   public void setTrainList() {
         String[][] routeArray = createRoutes();
         for (int i = 0; i < routeArray.length; i++) {
             trainList.add(new Train(i + 1, routeArray[i]));
         }
     }
 
-    public ArrayList<Train> searchTrains(String station1, String station2) {
-        for (Train train : trainList) {
-            ArrayList<String> tmp = new ArrayList<>(train.trainStations);
-            if (tmp.contains(station1.toLowerCase()) && tmp.contains(station2.toLowerCase()) &&
-                    tmp.indexOf(station1.toLowerCase()) < tmp.indexOf(station2.toLowerCase()))
-                trainSearcher.add(train);
-        }
-
-        return trainSearcher;
+    public static String[][] createRoutes() {
+        return new String[][]{
+                {"lviv", "ternopil", "kyiv"},
+                {"uzhgorod", "lviv", "kyiv"},
+                {"uzhgorod", "ternopil", "kyiv"},
+                {"kyiv", "ternopil", "lviv"},
+                {"kyiv", "lviv", "uzhgorod"},
+                {"kyiv", "ternopil", "uzhgorod"}
+        };
     }
 
-    public boolean dataChecking(int trainNumber, int coachNumber, int placeNumber) {
+    public ArrayList<Train> searchTrainList() {
+        for (Train train : trainList) {
+            ArrayList<String> tmp = new ArrayList<>(train.trainListStations);
+            if (tmp.contains(startStation.toLowerCase()) && tmp.contains(endStation.toLowerCase()) &&
+                    tmp.indexOf(startStation.toLowerCase()) < tmp.indexOf(endStation.toLowerCase()))
+                trainsForClient.add(train);
+        }
+        return trainsForClient;
+    }
 
-        if (trainSearcher.size() > trainNumber) {
-            if (trainSearcher.get(trainNumber).coaches.size() > coachNumber) {
-                if (trainSearcher.get(trainNumber).coaches.get(coachNumber).tickets.length > placeNumber) {
-                    return trainSearcher.get(trainNumber).coaches.get(coachNumber).tickets[placeNumber].free;
-
+    public boolean dataChecking() {
+        if (trainsForClient.size() > trainNumber) {
+            if (trainsForClient.get(trainNumber).coaches.size() > coachNumber) {
+                if (trainsForClient.get(trainNumber).coaches.get(coachNumber).tickets.length > placeNumber) {
+                    //якщо квиток вільний і існує впринципі, то повертає true
+                    return trainsForClient.get(trainNumber).coaches.get(coachNumber).tickets[placeNumber].free;
                 }
             }
         }
         return false;
     }
 
-    public void removeTrainSearcher() {
-        trainSearcher.clear();
+    public void removeTrainsForClient() {
+        trainsForClient.clear();
     }
 
-    public void showAllPlaceInTrain(String startStation, String endStation, Train train) {
-
-        int printDataAboutTrain = 0;
-
-        for (Coach coach : train.coaches) {
-            if (coach.getCountFreePlace() != 0) {
-                if (printDataAboutTrain == 0) {
-                    System.out.print("Train number: " + train.getTrainId());
-                    printDataAboutTrain++;
+    public void showAllPlaceInTrain() {
+        for (Train train : trainsForClient) {
+            int printDataAboutTrain = 0;
+            for (Coach coach : train.coaches) {
+                if (coach.getCountFreePlace() != 0) {
+                    if (printDataAboutTrain == 0) {
+                        System.out.print("Train number: " + train.getTrainId());
+                        printDataAboutTrain++;
+                    }
+                    System.out.print("\nCoach number: " + (train.coaches.indexOf(coach) + 1));
+                    showFreePlace(train.trainListStations, coach);
                 }
-                System.out.print("\nCoach number: " + (train.coaches.indexOf(coach) + 1));
-                showFreePlace(startStation, endStation, train.trainStations, coach);
             }
-        }
-
-        if (printDataAboutTrain == 1) {
-            System.out.println();
-            System.out.println();
+            if (printDataAboutTrain == 1) {
+                System.out.println();
+                System.out.println();
+            }
         }
     }
 
-    public void choosePlaceInTrain(int trainNumber, int numberCoach, int numberPlace, String startStation, String endStation, String userName) {
-
-        Coach foundCoach = trainSearcher.get(trainNumber).coaches.get(numberCoach);
-        buyPlace(numberPlace, startStation, endStation, trainSearcher.get(trainNumber).trainStations, userName, foundCoach);
+    public void choosePlaceInTrain() {
+        Coach foundCoach = trainsForClient.get(trainNumber).coaches.get(coachNumber);
+        buyPlace(trainsForClient.get(trainNumber).trainListStations, foundCoach);
     }
 
-    public void buyPlace(int numberPlace, String startStation, String endStation, ArrayList<String> stations, String userName, Coach coach) {
-
-        if (!coach.tickets[numberPlace].free) {
-            if (stations.indexOf(startStation) < stations.indexOf(coach.tickets[numberPlace].startStation)
-                    && stations.indexOf(endStation) <= stations.indexOf(coach.tickets[numberPlace].startStation)) {
-
-                coach.tickets[numberPlace].startStation = startStation;
-            } else if (stations.indexOf(startStation) >= stations.indexOf(coach.tickets[numberPlace].endStation)
-                    && stations.indexOf(endStation) > stations.indexOf(coach.tickets[numberPlace].endStation)) {
-
-                coach.tickets[numberPlace].endStation = endStation;
+    public void buyPlace(ArrayList<String> stations, Coach coach) {
+        if (!coach.tickets[placeNumber].free) {
+            if (stations.indexOf(startStation) < stations.indexOf(coach.tickets[placeNumber].startStation) && stations.indexOf(endStation) <= stations.indexOf(coach.tickets[placeNumber].startStation)) {
+                coach.tickets[placeNumber].startStation = startStation;
+            } else if (stations.indexOf(startStation) >= stations.indexOf(coach.tickets[placeNumber].endStation) && stations.indexOf(endStation) > stations.indexOf(coach.tickets[placeNumber].endStation)) {
+                coach.tickets[placeNumber].endStation = endStation;
             }
         }
-
-        coach.tickets[numberPlace].buyTicket(startStation, endStation, userName);
+        coach.tickets[placeNumber].buyTicket(startStation, endStation, userName);
         coach.countFreePlace--;
     }
 
-    public void showFreePlace(String startStation, String endStation, ArrayList<String> stations, Coach coach) {
-
+    public void showFreePlace(ArrayList<String> stations, Coach coach) {
         System.out.print("\nPlace num: ");
-
         for (int i = 0; i < coach.getAmountOfPlaces(); i++) {
             if (coach.tickets[i].free) {
-
                 System.out.print((i + 1) + " ");
             } else if (!coach.tickets[i].free) {
-
-                isFree(startStation, endStation, stations, coach.tickets[i], i);
+                isFree(stations, coach.tickets[i], i);
             }
         }
     }
 
-    private void isFree(String startStation, String endStation, ArrayList<String> stations, Ticket ticket, int i) {
-
-        if (stations.indexOf(startStation) < stations.indexOf(ticket.startStation)
-                && stations.indexOf(endStation) <= stations.indexOf(ticket.startStation)) {
-
+    public void isFree(ArrayList<String> stations, Ticket ticket, int i) {
+        if (stations.indexOf(startStation) < stations.indexOf(ticket.startStation) && stations.indexOf(endStation) <= stations.indexOf(ticket.startStation)) {
+            ticket.free = true;
             System.out.print((i + 1) + " ");
-        } else if (stations.indexOf(startStation) >= stations.indexOf(ticket.endStation)
-                && stations.indexOf(endStation) > stations.indexOf(ticket.endStation)) {
-
+        } else if (stations.indexOf(startStation) >= stations.indexOf(ticket.endStation) && stations.indexOf(endStation) > stations.indexOf(ticket.endStation)) {
+            ticket.free = true;
             System.out.print((i + 1) + " ");
         }
+    }
+
+    public void checkTicketState() {
+        Ticket ticket = trainsForClient.get(trainNumber).coaches.get(coachNumber).tickets[placeNumber];
+        if (!ticket.startStation.isEmpty()) {
+            ticket.free = false;
+        }
+    }
+
+    public void ticketOrder() {
+        Scanner scan = new Scanner(System.in);
+        int choice;
+        do {
+            System.out.println("Enter start station:");
+            startStation = scan.nextLine();
+
+            System.out.println("Enter final station:");
+            endStation = scan.nextLine();
+
+            if (searchTrainList().isEmpty()) {
+                System.out.println("There is no train with such route.");
+            } else {
+
+                showAllPlaceInTrain();
+
+                System.out.println("Enter number of train:");
+                trainNumber = scan.nextInt() - 1;
+
+                System.out.println("Enter number of coach:");
+                coachNumber = scan.nextInt() - 1;
+
+                System.out.println("Enter number of place:");
+                placeNumber = scan.nextInt() - 1;
+
+                //перевірка на існування даних за значеннями введених користувачем
+                if (dataChecking()) {
+                    System.out.println();
+                    System.out.println("Print your name:");
+                    scan.nextLine();
+                    userName = scan.nextLine();
+                    System.out.println();
+
+                    System.out.println("Ticket info:");
+                    System.out.println(" Train number: " + (trainNumber + 1) + "\n Number of coach: " + (coachNumber + 1) +
+                            "\n Place number: " + (placeNumber + 1) + "\n Customer: " + userName);
+                    System.out.println("\nTo proceed enter 1");
+                    choice = scan.nextInt();
+
+                    if (choice == 1) {
+                        choosePlaceInTrain(); //buying ticket
+                        removeTrainsForClient();
+                        System.out.println("Purchase successful!");
+                    } else {
+                        checkTicketState();
+                    }
+                } else {
+                    System.out.println("Incorrect data!\nTry again.");
+                }
+            }
+            System.out.println("\nTo buy another ticket enter 1");
+            choice = scan.nextInt();
+            scan.nextLine();
+        } while (choice == 1);
     }
 }

@@ -1,12 +1,18 @@
 package com.cintavra.Train;
 
+import java.util.Arrays;
+
 public class Coach {
-    private final static int AMOUNT_OF_PLACES = 4;
-    public int countFreePlace = AMOUNT_OF_PLACES;
-    public Ticket[] tickets = new Ticket[AMOUNT_OF_PLACES];
+    private int amountOfPlaces = 4;
+    public int countFreePlace = amountOfPlaces;
+    public Ticket[] tickets = new Ticket[amountOfPlaces];
 
     public Coach() {
-        for (int value = 0; value < AMOUNT_OF_PLACES; value++) {
+        setTickets();
+    }
+
+    public void setTickets() {
+        for (int value = 0; value < amountOfPlaces; value++) {
             tickets[value] = new Ticket();
         }
     }
@@ -16,8 +22,11 @@ public class Coach {
     }
 
     public int getAmountOfPlaces() {
-        return AMOUNT_OF_PLACES;
+        return amountOfPlaces;
     }
 
-
+    @Override
+    public String toString() {
+        return "Coach amountOfPlaces=" + amountOfPlaces + ", countFreePlace=" + countFreePlace + ", tickets=" + Arrays.toString(tickets);
+    }
 }

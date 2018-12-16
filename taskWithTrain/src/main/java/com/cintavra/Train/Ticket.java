@@ -1,10 +1,10 @@
 package com.cintavra.Train;
 
 public class Ticket {
-    public boolean free;
-    public String clientName;
-    public String startStation;
-    public String endStation;
+    protected boolean free;
+    protected String clientName;
+    protected String startStation;
+    protected String endStation;
 
     public Ticket() {
         this.free = true;
@@ -13,7 +13,12 @@ public class Ticket {
     public void buyTicket(String startStation, String endStation, String userName) {
         this.startStation = startStation;
         this.endStation = endStation;
-        clientName = userName;
-        free = false;
+        this.clientName = userName;
+        this.free = false;
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket status:" + free + ", clientName=" + clientName + ", startStation='" + startStation + ", endStation='" + endStation;
     }
 }
