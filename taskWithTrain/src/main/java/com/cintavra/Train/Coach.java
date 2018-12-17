@@ -1,7 +1,5 @@
 package com.cintavra.Train;
 
-import java.util.Arrays;
-
 public class Coach {
     private int amountOfPlaces = 4;
     public int countFreePlace = amountOfPlaces;
