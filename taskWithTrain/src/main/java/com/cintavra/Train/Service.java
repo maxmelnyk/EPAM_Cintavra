@@ -31,7 +31,9 @@ public class Service {
                 {"uzhgorod", "ternopil", "kyiv"},
                 {"kyiv", "ternopil", "lviv"},
                 {"kyiv", "lviv", "uzhgorod"},
-                {"kyiv", "ternopil", "uzhgorod"}
+                {"kyiv", "ternopil", "uzhgorod"},
+                {"kyiv", "ternopil", "zhytomyr", "uzhgorod"},
+                {"uzhgorod", "zhytomyr", "ternopil", "kyiv"}
         };
     }
 
