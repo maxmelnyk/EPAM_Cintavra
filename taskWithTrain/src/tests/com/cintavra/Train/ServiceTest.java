@@ -1,18 +1,13 @@
 package com.cintavra.Train;
 
-//import static org.junit.jupiter.api.Assertions.*;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.jupiter.api.*;
-import org.mockito.Mock;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 class ServiceTest {
     public Service service = new Service();
@@ -32,35 +27,29 @@ class ServiceTest {
         stations.forEach(x -> System.out.print(x + " "));
     }
 
-    @Before
-    public void setParams(){
-    }
-
-    @Test
-    public void testSearchingOfTrainList(){
-        service.setStartStation("k");
-        service.setEndStation("u");
-
-        assertEquals("Checking of searching of trains, which the user need", service.searchTrainList().size(), 2);
-        System.out.println("Finish success!");
-    }
-
-    @Test
-    public void testCheckingOfDataCorrect(){
+    @BeforeEach
+    public void setParams() {
+        System.out.println("HELLO");
         service.setTrainNumber(5);
         service.setCoachNumber(2);
         service.setPlaceNumber(4);
         service.setUserName("User");
         service.setStartStation("k");
         service.setEndStation("u");
+    }
+
+    @Test
+    public void testSearchingOfTrainList() {
+
+        assertEquals("Checking of searching of trains, which the user need", service.searchTrainList().size(), 2);
+        System.out.println("Finish success!");
+    }
+
+    @Test
+    public void testCheckingOfDataCorrect() {
         service.searchTrainList();
 
         assertTrue("Checking of correct data", service.dataChecking());
         System.out.println("Result: " + service.dataChecking() + "!");
-    }
-
-    @Test
-    public void ticketOrder() {
-
     }
 }
