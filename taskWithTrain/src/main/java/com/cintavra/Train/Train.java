@@ -25,4 +25,8 @@ public class Train {
             coaches.add(coach);
         }
     }
+
+    public ArrayList<String> getTrainListStations() {
+        return trainListStations;
+    }
 }
