@@ -5,18 +5,28 @@ import java.util.List;
 
 public class Coach {
     private int couchId;
+    private CoachType coachType;
     public List<Place> places;
 
-    public Coach(int couchId, List<Place> places) {
+    public Coach(int couchId, CoachType coachType, List<Place> places) {
         this.couchId = couchId;
+        this.coachType = coachType;
         this.places = places;
     }
 
-    public List<Place> getTickets() {
+    public List<Place> getPlaces() {
         return places;
     }
 
     public int getCouchId() {
         return couchId;
+    }
+
+    public void printAllFreePlaces() {
+        System.out.print("Free places: ");
+        for (Place place : places) {
+            if (place.getState())
+                System.out.print((place.getId() + 1) + " ");
+        }
     }
 }

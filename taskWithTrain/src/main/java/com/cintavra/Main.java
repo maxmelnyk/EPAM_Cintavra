@@ -7,8 +7,9 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        Service service = new Service();
         Scanner scan = new Scanner(System.in);
+        Service service = new Service();
+
         int choice;
         do {
             System.out.println("Enter start station:");
@@ -48,7 +49,6 @@ public class Main {
 
                     if (choice == 1) {
                         buyPlace();
-                        removeTrainsForClient();
                         System.out.println("Purchase successful!");
                     } else {
                         checkTicketState();
