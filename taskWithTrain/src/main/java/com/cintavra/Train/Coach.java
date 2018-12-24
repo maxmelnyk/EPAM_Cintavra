@@ -1,25 +1,22 @@
 package com.cintavra.Train;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Coach {
-    private int amountOfPlaces = 4;
-    public int countFreePlace = amountOfPlaces;
-    public Ticket[] tickets = new Ticket[amountOfPlaces];
+    private int couchId;
+    public List<Place> places;
 
-    public Coach() {
-        setTickets();
+    public Coach(int couchId, List<Place> places) {
+        this.couchId = couchId;
+        this.places = places;
     }
 
-    public void setTickets() {
-        for (int value = 0; value < amountOfPlaces; value++) {
-            tickets[value] = new Ticket();
-        }
+    public List<Place> getTickets() {
+        return places;
     }
 
-    public int getCountFreePlace() {
-        return countFreePlace;
-    }
-
-    public int getAmountOfPlaces() {
-        return amountOfPlaces;
+    public int getCouchId() {
+        return couchId;
     }
 }

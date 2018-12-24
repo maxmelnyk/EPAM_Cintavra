@@ -1,32 +1,24 @@
 package com.cintavra.Train;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 public class Train {
-    private int countOfCoaches = 1;
-    private int trainId;
-    protected ArrayList<Coach> coaches = new ArrayList<>();
-    protected ArrayList<String> trainListStations = new ArrayList<>();
 
-    Train(int trainId, String[] route) {
+    private int trainId;
+    protected List<Coach> coaches;
+    protected List<Station> route;
+
+    Train(int trainId, List<Station> route) {
         this.trainId = trainId;
-        setCoaches();
-        this.trainListStations.addAll(Arrays.asList(route));
+        this.route.addAll(route);
     }
 
     public int getTrainId() {
         return trainId;
     }
 
-    private void setCoaches() {
-        for (int i = 0; i < countOfCoaches; i++) {
-            Coach coach = new Coach();
-            coaches.add(coach);
-        }
-    }
 
-    public ArrayList<String> getTrainListStations() {
-        return trainListStations;
+    public List<Station> getRoute() {
+        return route;
     }
 }
