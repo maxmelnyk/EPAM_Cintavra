@@ -3,7 +3,6 @@ package com.cintavra.Train;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class Service {
     private List<Train> trainList;
     private List<Ticket> tickets;
@@ -158,32 +157,6 @@ public class Service {
             }
         }
     }
-
-    /*public void isPlaceStillFree(List<Train> trainsForUser) {
-        int count = 0;
-        for (Train train :trainsForUser) {
-            for (Ticket ticket :tickets) {
-                if(train.getTrainId() == ticket.getTrainId()) {
-                   if ((train.getRoute().get(0) != userStartStation) && (train.getRoute().get(train.getRoute().size() - 1) != userEndStation)){
-                       for (Station station :train.getRoute()) {
-                           if (station.getName().equals(ticket.getStartStation())){
-                               if (train.getRoute().indexOf(station) > train.getRoute().indexOf(userStartStation) && train.getRoute().indexOf(station) > train.getRoute().indexOf(userEndStation)){
-                                   train.getCoaches().get(ticket.getCoachId()).getPlaces().get(ticket.getPlaceId()).setState(true);
-                                   System.out.println("1 1");
-                               }
-                           } else if(station.getName().equals(ticket.getEndStation())) {
-                                if (train.getRoute().indexOf(new Station(ticket.getEndStation())) < train.getRoute().indexOf(userStartStation) && train.getRoute().indexOf(new Station(ticket.getEndStation())) < train.getRoute().indexOf(userEndStation)){
-                                   train.getCoaches().get(ticket.getCoachId()).getPlaces().get(ticket.getPlaceId()).setState(true);
-                                   System.out.println("2 22 2 2 2 2");
-                               }
-                           }
-
-                       }
-                   }
-                }
-            }
-        }
-    }*/
 
     public void checkTicketState(List<Train> trainsForUser, int trainNumber, int coachNumber, int placeNumber) {
         for (Train train : trainsForUser) {

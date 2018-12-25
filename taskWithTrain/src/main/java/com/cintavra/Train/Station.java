@@ -1,6 +1,5 @@
 package com.cintavra.Train;
 
-
 import java.util.Objects;
 
 public class Station {

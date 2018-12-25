@@ -11,7 +11,6 @@ public class Main {
         Scanner scanString = new Scanner(System.in);
         Service service = new Service();
 
-
         int choice;
         do {
             System.out.println("Enter start station:");
@@ -39,7 +38,6 @@ public class Main {
                 System.out.println("Enter number of place:");
                 int placeNumber = scanInt.nextInt();
 
-                //перевірка на існування даних за значеннями введених користувачем
                 if (service.checkEnteredData(trainNumber, coachNumber, placeNumber, trainsForUser)) {
                     System.out.println();
                     System.out.println("Print your name:");
