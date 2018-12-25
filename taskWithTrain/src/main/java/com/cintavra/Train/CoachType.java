@@ -2,7 +2,7 @@ package com.cintavra.Train;
 
 public enum CoachType {
 
-    Simple(34);
+    Simple(3);
     private int capacity;
 
     CoachType(int capacity) {

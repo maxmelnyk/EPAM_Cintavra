@@ -6,7 +6,7 @@ import java.util.List;
 public class Coach {
     private int couchId;
     private CoachType coachType;
-    public List<Place> places;
+    private List<Place> places;
 
     public Coach(int couchId, CoachType coachType, List<Place> places) {
         this.couchId = couchId;

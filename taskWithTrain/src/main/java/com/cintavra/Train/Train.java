@@ -10,7 +10,8 @@ public class Train {
 
     Train(int trainId, List<Station> route) {
         this.trainId = trainId;
-        this.route.addAll(route);
+        this.route = route;
+        this.coaches = new ArrayList<>();
     }
 
     public int getTrainId() {
@@ -31,7 +32,7 @@ public class Train {
 
     public void printAllCoaches() {
         for (Coach coach : coaches) {
-            System.out.println("Coach number: " + (coach.getCouchId() + 1));
+            System.out.println("\nCoach number: " + (coach.getCouchId() + 1));
             coach.printAllFreePlaces();
         }
     }

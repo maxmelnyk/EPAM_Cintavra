@@ -67,9 +67,10 @@ public class Ticket {
 
 
 
-    private void printTicket() {
-        System.out.println("Ticket info:" + "\nclientName='" + clientName + '\'' +
-                ", \ntrainId=" + trainId + ", \ncoachId=" + coachId +
-                ", \nplaceId=" + placeId + ", \nstartStatione=" + startStation + '.');
+    public void printTicket() {
+        System.out.println("Ticket info:" + "\nclientName ='" + clientName + '\'' +
+                ", \ntrainId =" + trainId + ", \ncoachId =" + coachId +
+                ", \nplaceId =" + placeId + ", \nfrom =" + startStation +
+                " to =" + endStation + '.');
     }
 }
