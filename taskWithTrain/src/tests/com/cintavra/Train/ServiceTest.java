@@ -13,7 +13,7 @@ class ServiceTest {
 
     public Service service = new Service();
 
-    @Test
+    /*@Test
     public void testSize() {
 
         assertEquals("Checking size of list", 6, service.trainList.size());
@@ -53,5 +53,5 @@ class ServiceTest {
 
         assertTrue("Checking of correct data", service.dataChecking());
         System.out.println("Result: " + service.dataChecking() + "!");
-    }
+    }*/
 }

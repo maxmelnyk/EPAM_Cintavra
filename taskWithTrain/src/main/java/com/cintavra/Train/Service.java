@@ -94,8 +94,7 @@ public class Service {
             if (trainNumber - 1 == train.getTrainId()) {
                 for (Coach coach : train.getCoaches()) {
                     if (coachNumber - 1 == coach.getCouchId()) {
-                        if (placeNumber < coach.getPlaces().size()) {
-                            System.out.println(coach.getPlaces().get(placeNumber - 1).getState());
+                        if (placeNumber <= coach.getPlaces().size()) {
                             return coach.getPlaces().get(placeNumber - 1).getState();
                         }
                     }
@@ -118,9 +117,46 @@ public class Service {
     public void buyTicket(String clientName, int trainId, int coachId, int placeId) {
         Place place = trainList.get(trainId - 1).getCoaches().get(coachId - 1).getPlaces().get(placeId - 1);
         place.setState(false);
+        if (place.getStartStation() != null && place.getEndStation() != null) {
+            replaceStartAndEndStations(trainId, place);
+        } else {
+            place.setStartStation(userStartStation);
+            place.setEndStation(userEndStation);
+        }
         Ticket ticket = new Ticket(clientName, trainId, coachId, placeId, userStartStation.getName(), userEndStation.getName());
         tickets.add(ticket);
         ticket.printTicket();
+    }
+
+    private void replaceStartAndEndStations(int trainId, Place place) {
+        for (Train train : trainList) {
+            if (train.getTrainId() == trainId - 1) {
+                if (train.getRoute().indexOf(place.getStartStation()) < train.getRoute().indexOf(userStartStation)
+                        && train.getRoute().indexOf(place.getEndStation()) <= train.getRoute().indexOf(userStartStation)) {
+                    place.setEndStation(userEndStation);
+                } else {
+                    place.setStartStation(userStartStation);
+                }
+            }
+        }
+    }
+
+    public void isPlaceStillFree(List<Train> trainsForUser) {
+        for (Train train : trainsForUser) {
+            for (Coach coach : train.getCoaches()) {
+                for (Place place : coach.getPlaces()) {
+                    if (!place.getState()) {
+                        if (train.getRoute().indexOf(userStartStation) < train.getRoute().indexOf(place.getStartStation())
+                                && train.getRoute().indexOf(userEndStation) <= train.getRoute().indexOf(place.getStartStation())) {
+                            place.setState(true);
+                        } else if (train.getRoute().indexOf(userStartStation) >= train.getRoute().indexOf(place.getEndStation())
+                                && train.getRoute().indexOf(userEndStation) > train.getRoute().indexOf(place.getEndStation())) {
+                            place.setState(true);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /*public void isPlaceStillFree(List<Train> trainsForUser) {
@@ -148,28 +184,22 @@ public class Service {
             }
         }
     }*/
-    public void isPlaceStillFree(List<Train> trainsForUser) {
-        int count = 0;
+
+    public void checkTicketState(List<Train> trainsForUser, int trainNumber, int coachNumber, int placeNumber) {
         for (Train train : trainsForUser) {
-            for (Ticket ticket : tickets) {
-                if (train.getTrainId() == ticket.getTrainId()) {
-                    if (train.getRoute().indexOf(userStartStation) < train.getRoute().indexOf(ticket.getStartStation())
-                            && train.getRoute().indexOf(userEndStation) <= train.getRoute().indexOf(ticket.getStartStation())) {
-                        train.getCoaches().get(ticket.getCoachId()).getPlaces().get(ticket.getPlaceId()).setState(true);
-                        System.out.print((count + 1) + " ");
-                    } else if (train.getRoute().indexOf(userStartStation) >= train.getRoute().indexOf(ticket.getEndStation())
-                            && train.getRoute().indexOf(userEndStation) > train.getRoute().indexOf(ticket.getEndStation())) {
-                        train.getCoaches().get(ticket.getCoachId()).getPlaces().get(ticket.getPlaceId()).setState(true);
-                        System.out.print((count + 1) + " ");
+            if (trainNumber - 1 == train.getTrainId()) {
+                for (Coach coach : train.getCoaches()) {
+                    if (coachNumber - 1 == coach.getCouchId()) {
+                        for (Place place : coach.getPlaces()) {
+                            if (place.getId() == placeNumber - 1) {
+                                if (place.getStartStation() != null) {
+                                    place.setState(false);
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
     }
-    /*public void checkTicketState() {
-        Ticket ticket = trainsForClient.get(trainNumber).coaches.get(coachNumber).tickets[placeNumber];
-        if (!ticket.startStation.isEmpty()) {
-            ticket.free = false;
-        }
-    }*/
 }

@@ -26,7 +26,7 @@ public class Main {
                 System.out.println("There is no train with such route.");
             } else {
 
-//                service.isPlaceStillFree(trainsForUser);
+                service.isPlaceStillFree(trainsForUser);
                 service.showAllPlaceInTrains(trainsForUser);
 
                 System.out.println("Choose your place");
@@ -54,7 +54,7 @@ public class Main {
                         service.buyTicket(userName, trainNumber, coachNumber, placeNumber);
                         System.out.println("Purchase successful!");
                     } else {
-                        //checkTicketState();
+                        service.checkTicketState(trainsForUser, trainNumber, coachNumber, placeNumber);
                     }
                 } else {
                     System.out.println("Incorrect data!\nTry again.");
