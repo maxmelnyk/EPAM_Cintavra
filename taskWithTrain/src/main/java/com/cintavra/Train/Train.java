@@ -1,36 +1,39 @@
 package com.cintavra.Train;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
+import java.util.*;
 
 public class Train {
-    private int countOfCoaches;
+
     private int trainId;
-//    public LocalDateTime date;
-    protected ArrayList<Coach> coaches = new ArrayList<>();
-    protected ArrayList<String> trainListtations = new ArrayList<>();
+    private List<Coach> coaches;
+    private List<Station> route;
 
-    Train(int trainId, /*LocalDateTime date,*/ String[] route) {
-        this.countOfCoaches = 3;
+    Train(int trainId, List<Station> route) {
         this.trainId = trainId;
-        setCoaches();
-//        this.date = date;
-        this.trainListtations.addAll(Arrays.asList(route));
-
+        this.route = route;
+        this.coaches = new ArrayList<>();
     }
 
-    private void setCoaches(){
-
-        for (int i = 0; i < countOfCoaches; i++) {
-            Coach coach = new Coach();  //ініціалізація даних про вагон
-            coaches.add(coach);
-        }
-    }
-
-    protected int getTrainId() {
+    public int getTrainId() {
         return trainId;
+    }
+
+    public void addCoach(Coach coach) {
+        coaches.add(coach);
+    }
+
+    public List<Station> getRoute() {
+        return route;
+    }
+
+    public List<Coach> getCoaches() {
+        return coaches;
+    }
+
+    public void printAllCoaches() {
+        for (Coach coach : coaches) {
+            System.out.println("\nCoach number: " + (coach.getCouchId() + 1));
+            coach.printAllFreePlaces();
+        }
     }
 }
