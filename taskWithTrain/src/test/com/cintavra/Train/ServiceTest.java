@@ -4,29 +4,25 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import java.util.Arrays;
-
 public class ServiceTest {
     public Service service = new Service();
-    public Train train = new Train(7, new String[]{"kyiv", "ternopil", "zhytomyr", "uzhgorod"});
+
+
+
+    Train train = new Train(0, service.createRoutes(0));
 
     @Test
     public void testCountOfRoutes() {
-        assertEquals("Checking count of route", 8, service.trainList.size());
+        assertEquals("Checking amount of trains", 3, service.createTrainList().size());
     }
 
     @Test
     public void testIfTrainExist() {
-        assertEquals(train.getTrainId(), 7);
+        assertNotEquals(train.getTrainId(), 5);
     }
 
     @Test
-    public void findElementOfTranList() {
-        for (Train train : service.getTrainList()) {
-            if (train.getTrainId() == 7) {
-                assertEquals(train.getTrainListStations(), Arrays.asList("kyiv", "ternopil", "zhytomyr", "uzhgorod"));
-                System.out.println("+");
-            }
-        }
+    public void testIfCount0fCouches() {
+        assertEquals("Checking amount of couches in the train", 0, train.getCoaches().size());
     }
 }
