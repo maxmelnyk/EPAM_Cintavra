@@ -1,6 +1,7 @@
 package com.cintavra;
 
 import com.cintavra.Train.*;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -47,12 +48,10 @@ public class Main {
                     System.out.println("\nTo confirm your order enter 1");
                     choice = scanInt.nextInt();
 
-                    if (choice == 1) {
+                    if (choice == 1)
                         service.buyTicket(userName, trainNumber, coachNumber, placeNumber);
-                        System.out.println("Purchase successful!");
-                    } else {
-                        service.checkPlaceState(trainsForUser);
-                    }
+                    System.out.println("Purchase successful!");
+                    service.checkPlaceState(trainsForUser);
                 } else {
                     System.out.println("Incorrect data!\nTry again.");
                 }
