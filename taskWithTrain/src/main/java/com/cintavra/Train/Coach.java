@@ -21,6 +21,7 @@ public class Coach {
         return places;
     }
 
+
     public void printAllFreePlaces() {
         System.out.print("Free places: ");
         for (Place place : places) {
