@@ -129,6 +129,7 @@ public class Service {
         ticket.printTicket();
     }
 
+    //changing place`s state on that stations, where the place is busy
     private void changeBusyStationsOfPlace(int trainNumber, Place place) {
         for (Train train : trainList) {
             if (train.getTrainId() == trainNumber - 1) {
