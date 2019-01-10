@@ -1,30 +1,31 @@
 package com.cintavra.Train;
 
+import java.util.List;
+
 public class Coach {
-    private int AMOUNT_OF_PLACES = 4;
-    public int countFreePlace = AMOUNT_OF_PLACES;
-    public Ticket[] tickets = new Ticket[AMOUNT_OF_PLACES];
+    private int couchId;
+    private CoachType coachType;
+    private List<Place> places;
 
-    public Coach() {
-
-        setTickets();
+    public Coach(int couchId, CoachType coachType, List<Place> places) {
+        this.couchId = couchId;
+        this.coachType = coachType;
+        this.places = places;
     }
 
-    public void setTickets() {
+    public List<Place> getPlaces() {
+        return places;
+    }
 
-        for (int value = 0; value < AMOUNT_OF_PLACES; value++) {
-            tickets[value] = new Ticket();
+    public int getCouchId() {
+        return couchId;
+    }
+
+    public void printAllFreePlaces() {
+        System.out.print("Free places: ");
+        for (Place place : places) {
+            if (place.getState())
+                System.out.print((place.getId() + 1) + " ");
         }
     }
-
-    public int getCountFreePlace() {
-
-        return countFreePlace;
-    }
-
-    public int getAmountOfPlaces() {
-        return AMOUNT_OF_PLACES;
-    }
-
-
 }

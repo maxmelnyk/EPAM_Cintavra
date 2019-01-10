@@ -45,11 +45,55 @@ class ServiceTest {
         System.out.println("Finish success!");
     }
 
+    public Service service = new Service();
+
+    /*@Test
+    public void testSize() {
+
+        assertEquals("Checking size of list", 6, service.trainList.size());
+        System.out.println("Method testSize completed!");
+    }
+
     @Test
+    public void testTheLastElementOfTranList() {
+
+        ArrayList<String> stations = service.trainList.get(service.trainList.size() - 1).trainListStations;
+        assertEquals("Checking of the last element of trainList", Arrays.asList("k", "t", "u"), stations);
+        stations.forEach(x -> System.out.print(x + " "));
+    }
+
+    @BeforeEach
+    public void setParams() {
+        System.out.println("HELLO");
+        service.setTrainNumber(5);
+        service.setCoachNumber(2);
+        service.setPlaceNumber(4);
+        service.setUserName("User");
+        service.setStartStation("k");
+        service.setEndStation("u");
+    }
+
+    @Test
+<<<<<<< HEAD
     public void testCheckingOfDataCorrect() {
         service.searchTrainList();
 
         assertTrue("Checking of correct data", service.dataChecking());
         System.out.println("Result: " + service.dataChecking() + "!");
+=======
+    public void testSearchingOfTrainList() {
+
+        assertEquals("Checking of searching of trains, which the user need", service.searchTrainList().size(), 2);
+        System.out.println("Finish success!");
+>>>>>>> origin
     }
+
+    @Test
+    public void testCheckingOfDataCorrect() {
+
+        service.searchTrainList();
+
+        assertTrue("Checking of correct data", service.dataChecking());
+        System.out.println("Result: " + service.dataChecking() + "!");
+    }*/
 }
