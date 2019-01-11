@@ -1,6 +1,7 @@
 import enums.Colors;
 import enums.Countries;
 import products.*;
+import products.bouquets.Bouquet;
 import products.flowers.*;
 
 import java.util.ArrayList;
