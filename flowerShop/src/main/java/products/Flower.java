@@ -1,9 +1,8 @@
 package products;
 
-import enums.Colors;
-import enums.Countries;
+import enums.*;
 
-public abstract class Flower extends Product {
+public class Flower extends Product {
     private int height;
     private Colors color;
 

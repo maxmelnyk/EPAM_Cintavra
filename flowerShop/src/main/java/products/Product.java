@@ -13,7 +13,6 @@ public abstract class Product {
         this.country = country;
     }
 
-
     public String getName() {
         return name;
     }

@@ -1,9 +1,7 @@
 import products.Product;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.List;
+import java.io.*;
+import java.util.Map;
 
 public class Menu {
     public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -36,63 +34,50 @@ public class Menu {
     }
 
     private void mainMenuChoice() {
-        String line;
-        try {
-            while ((line = reader.readLine()) != null) {
-                if (line.isEmpty()) {
-                    break;
-                } else {
-                    switch (Integer.parseInt(line)) {
-                        case 1:
-                            Stock.access().viewFlowersAvailable();
-                            flowerMenuChoice();
-                            break;
-                        case 2:
-                            Stock.access().viewPalmTreesAvailable();
-                            palmTreesMenuChoice();
-                            break;
-                        case 3:
-                            Stock.access().viewBouquetsAvailable();
-                            bouquetMenuChoice();
-                            break;
-                        case 4:
-                            Stock.access().viewCactusAvailable();
-                            cactusMenuChoice();
-                            break;
-                        case 5:
-                            Order.access().setFlowersAsBouquet(true);
-                            confirmedOrderAction();
-                            break;
-                        default:
-                            System.out.println("Entered wrong value, try again.");
-                            continue;
-                    }
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("An error occurred! Restart the application.");
-            System.exit(0);
-        }
+//        String line;
+//        try {
+//            while ((line = reader.readLine()) != null) {
+//                if (line.isEmpty()) {
+//                    break;
+//                } else {
+//                    switch (Integer.parseInt(line)) {
+//                        case 1:
+//                            Stock.access().viewProductsAvailable();
+//                            flowerMenuChoice();
+//                            break;
+//                        case 2:
+//                            Stock.access().viewProductsAvailable();
+//                            palmTreesMenuChoice();
+//                            break;
+//                        case 3:
+//                            Stock.access().viewProductsAvailable();
+//                            bouquetMenuChoice();
+//                            break;
+//                        case 4:
+//                            Stock.access().viewProductsAvailable();
+//                            cactusMenuChoice();
+//                            break;
+//                        case 5:
+//                            Order.access().setFlowersAsBouquet(true);
+//                            confirmedOrderAction();
+//                            break;
+//                        default:
+//                            System.out.println("Entered wrong value, try again.");
+//                            continue;
+//                    }
+//                }
+//            }
+//        } catch (Exception e) {
+//            System.out.println("An error occurred! Restart the application.");
+//            System.exit(0);
+//        }
     }
 
-    public void flowerMenuChoice() {
-        menuChoice(Stock.access().getFlowersAvailable());
+    public void productMenuChoice() {
+        menuChoice(Stock.access().getProductsAvailable());
     }
 
-    public void palmTreesMenuChoice() {
-        menuChoice(Stock.access().getPalmsTreesAvailable());
-    }
-
-    public void cactusMenuChoice() {
-        menuChoice(Stock.access().getCactusAvailable());
-    }
-
-    public void bouquetMenuChoice() {
-        menuChoice(Stock.access().getBouquetsAvailable());
-    }
-
-
-    public void menuChoice(List<Product> productList) {
+    public void menuChoice(Map<Product, Integer> map) {
         System.out.println("Enter number of item you want to buy:\n" +
                 "\nenter 0 to go back or press \"Enter\" button to exit.");
         String line;
@@ -102,11 +87,12 @@ public class Menu {
                     break;
                 } else {
                     int choice = Integer.parseInt(line);
-                    if (choice > 0 && choice <= productList.size()) {
+                    if (choice > 0 && choice <= map.size()) {
                         System.out.println("how many pcs you want to buy?");
                         int amount = Integer.parseInt(reader.readLine());
-                        if (amount <= Stock.access().getCountOfProduct(productList.get(choice - 1).getName())) {
-                            Order.access().addToOrderList(productList.get(choice - 1), amount);
+
+                        if (amount <= Stock.access().getProductsAvailable().get((choice - 1))) {
+                            Order.access().addToOrderList((Product) map.keySet(), amount);
                             returnExitOrContinue();
                         } else {
                             System.out.println("Sorry, " + amount + " pcs unavailable now.");

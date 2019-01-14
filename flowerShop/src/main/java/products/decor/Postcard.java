@@ -3,9 +3,9 @@ package products.decor;
 import products.bouquets.*;
 
 public class Postcard extends BouquetDecorator {
-    private final Bouquet bouquet;
+    private final IBouquet bouquet;
 
-    public Postcard(Bouquet bouquet) {
+    public Postcard(IBouquet bouquet) {
         this.bouquet = bouquet;
     }
 

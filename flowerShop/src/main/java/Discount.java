@@ -2,16 +2,16 @@ import products.Flower;
 import products.Product;
 
 import java.util.List;
+import java.util.Map;
 
 public class Discount {
-
-    public static double calculateNewPrice(List<Product> products) {
+    public static double calculateNewPrice(Map<Product, Integer> map) {
         int orderedProductSize = 0;
         double newPrice = 0;
 
-        for (int i = 0; i < products.size(); i++) {
-            orderedProductSize += Order.access().getOrderQuantity().get(i);
-            newPrice += (products.get(i).getPrice() * Order.access().getOrderQuantity().get(i));
+        for (Product product : map.keySet()) {
+            orderedProductSize += Order.access().getOrder().get(product);
+            newPrice += (map.get(product.getPrice()) * Order.access().getOrder().get(product));
         }
 
         if (orderedProductSize > 5 && orderedProductSize <= 15) {
@@ -23,16 +23,16 @@ public class Discount {
         return newPrice;
     }
 
-    public static double calculatePriceWithBouquet(List<Product> products) {
+    public static double calculatePriceWithBouquet(Map<Product, Integer> map) {
         int orderedProductSize = 1;
         double bouquet = 0;
         double newPrice = 0;
-        for (int i = 0; i < products.size(); i++) {
-            if (products.get(i) instanceof Flower) {
-                bouquet += (products.get(i).getPrice() * Order.access().getOrderQuantity().get(i));
+        for (Product product : map.keySet()) {
+            if (map.keySet() instanceof Flower) {
+                bouquet += (map.get(product.getPrice()) * Order.access().getOrder().get(product));
             } else {
-                orderedProductSize += Order.access().getOrderQuantity().get(i);
-                newPrice += (products.get(i).getPrice() * Order.access().getOrderQuantity().get(i));
+                orderedProductSize += Order.access().getOrder().get(product);
+                newPrice += (map.get(product.getPrice()) * Order.access().getOrder().get(product));
             }
         }
         bouquet *= 0.7;

@@ -4,10 +4,10 @@ import enums.WrapperType;
 import products.bouquets.*;
 
 public class Wrapper extends BouquetDecorator {
-    private final Bouquet bouquet;
+    private final IBouquet bouquet;
     private WrapperType wrapperType;
 
-    public Wrapper(Bouquet bouquet, WrapperType wrapperType) {
+    public Wrapper(IBouquet bouquet, WrapperType wrapperType) {
         this.bouquet = bouquet;
         this.wrapperType = wrapperType;
     }

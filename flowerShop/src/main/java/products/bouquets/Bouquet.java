@@ -1,11 +1,9 @@
 package products.bouquets;
 
-import enums.Countries;
-import products.Flower;
-import products.Product;
+import enums.*;
+import products.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Bouquet extends Product implements IBouquet {
     private List<Flower> flowers;
@@ -21,6 +19,6 @@ public class Bouquet extends Product implements IBouquet {
 
     @Override
     public String describe() {
-        return "It's simple bouquet ";
+        return "It's roses bouquet ";
     }
 }

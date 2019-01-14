@@ -3,10 +3,10 @@ package products.decor;
 import products.bouquets.*;
 
 public class Ribbon extends BouquetDecorator {
-    private final Bouquet bouquet;
+    private final IBouquet bouquet;
     private String color;
 
-    public Ribbon(Bouquet bouquet, String color) {
+    public Ribbon(IBouquet bouquet, String color) {
         this.bouquet = bouquet;
         this.color = color;
     }
